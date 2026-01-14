@@ -1,7 +1,7 @@
 <template>
     <div class="card" :class="{ 'borderojo': props.estado === 'SIN_SENAL', 'bordeverde': props.estado === 'CONECTADO', 'bordeamarillo': props.estado === 'FALLO_AUTH' }">
         <h3>{{ nombre }}</h3>
-        <p class="estado">{{ estado }}</p>
+        <p class="estado" :class="{ 'textrojo': props.estado === 'SIN_SENAL', 'textverde': props.estado === 'CONECTADO', 'textamarillo': props.estado === 'FALLO_AUTH' }">{{ estado }}</p>
         <p class="fecha">{{ fecha }}</p>
     </div>
 </template>
@@ -15,23 +15,6 @@ const props = defineProps({
     fecha: String
 });
 
-// Lógica del color
-const colorDinamico = computed(() => {
-    let colorFinal = "#aeaeae";
-
-    switch (props.estado) {
-        case "CONECTADO":
-            colorFinal = "#53b921"; 
-            break;
-        case "SIN_SENAL":
-            colorFinal = "#c13205";
-            break;
-        case "FALLO_AUTH":
-            colorFinal = "#f0ad00";
-            break;
-    }
-    return colorFinal;
-});
 
 
 </script>
@@ -85,5 +68,17 @@ p {
 .bordeamarillo{
     border-color: #f0ad00;
     background-color: #f0ac0073;
+}
+
+.textverde{
+color:rgb(36, 156, 36);
+}
+
+.textrojo{
+color: #c20202;
+}
+
+.textamarillo{
+color: #f0ad00;
 }
 </style>
