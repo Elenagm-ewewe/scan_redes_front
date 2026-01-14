@@ -11,6 +11,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue' //Variable reactiva
 import Tarjeta from './components/Tarjeta.vue'
 
 const listaDeDatos = [

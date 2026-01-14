@@ -1,7 +1,7 @@
 <template>
-    <div class="card" :style="{ borderColor: colorDinamico, backgroundColor: colorfondoDinamico }">
+    <div class="card" :class="{ 'borderojo': props.estado === 'SIN_SENAL', 'bordeverde': props.estado === 'CONECTADO', 'bordeamarillo': props.estado === 'FALLO_AUTH' }">
         <h3>{{ nombre }}</h3>
-        <p class="estado" :style="{ color: colorDinamico }">{{ estado }}</p>
+        <p class="estado">{{ estado }}</p>
         <p class="fecha">{{ fecha }}</p>
     </div>
 </template>
@@ -33,22 +33,6 @@ const colorDinamico = computed(() => {
     return colorFinal;
 });
 
-const colorfondoDinamico = computed(() => {
-    let colorfondoFinal = "#aeaeae";
-
-    switch (props.estado) {
-        case "CONECTADO":
-            colorfondoFinal = "#54b9217c"; 
-            break;
-        case "SIN_SENAL":
-            colorfondoFinal = "#c1310585";
-            break;
-        case "FALLO_AUTH":
-            colorfondoFinal = "#f0ac0096";
-            break;
-    }
-    return colorfondoFinal;
-});
 
 </script>
 
@@ -76,6 +60,7 @@ h3 {
     font-weight: bolder;
     width: fit-content;
     box-shadow: 1px 1px 5px #000000;
+    color: white;
 }
 
 .fecha {
@@ -85,5 +70,20 @@ h3 {
 
 p {
     margin: 5px 0;
+}
+
+.borderojo{
+    border-color: #c20202;
+    background-color: #c202026e;
+}
+
+.bordeverde{
+    border-color: rgb(36, 156, 36);
+    background-color:  rgba(59, 161, 0, 0.466);
+}
+
+.bordeamarillo{
+    border-color: #f0ad00;
+    background-color: #f0ac0073;
 }
 </style>
