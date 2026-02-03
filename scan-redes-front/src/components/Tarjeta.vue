@@ -1,20 +1,18 @@
 <template>
     <div class="card" :class="{ 'borderojo': props.estado === 'SIN_SENAL', 'bordeverde': props.estado === 'CONECTADO', 'bordeamarillo': props.estado === 'FALLO_AUTH' }">
-        <h3>{{ nombre }}</h3>
+        <h3>{{ nombreRed }}</h3>
         <p class="estado" :class="{ 'textrojo': props.estado === 'SIN_SENAL', 'textverde': props.estado === 'CONECTADO', 'textamarillo': props.estado === 'FALLO_AUTH' }">{{ estado }}</p>
-        <p class="fecha">{{ fecha }}</p>
+        <p class="fecha">{{ fecha_hora }}</p>
     </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
 
 const props = defineProps({
-    nombre: String,
+    nombreRed: String,
     estado: String,
-    fecha: String
+    fecha_hora: String
 });
-
 
 
 </script>

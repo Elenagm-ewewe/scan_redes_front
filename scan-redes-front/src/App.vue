@@ -3,23 +3,46 @@
   <div class="contenedor">
     <Tarjeta
       v-for="item in listaDeDatos"
-      :nombre="item.nombre"
+      :nombreRed="item.nombreRed"
       :estado="item.estado"
-      :fecha="item.fecha"
+      :fecha_hora="item.fecha_hora"
     />
   </div>
 </template>
 
+
 <script setup>
-import { ref } from 'vue' //Variable reactiva
+import { ref, onMounted } from 'vue' 
 import Tarjeta from './components/Tarjeta.vue'
 
-const listaDeDatos = [
-  { nombre: 'Andared', estado: 'CONECTADO', fecha:"12-03-2054" },
-  { nombre: 'Andared_Corporativo', estado: 'FALLO_AUTH',fecha:"04-04-2024"},
-  { nombre: 'Andared_2', estado: 'SIN_SENAL',fecha:"22-11-2023" },
-]
+//Inicializamos como un ref vacío (un array por defecto)
+const listaDeDatos = ref([]);
+
+async function pideDatos() {
+  try {
+    const response = await fetch('http://localhost:8080/registros-redes');
+    
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const myData = await response.json();
+    
+    listaDeDatos.value = myData;
+
+  } catch (error) {
+    console.error("Hubo un error al obtener los datos:", error);
+  }
+}
+
+onMounted(() => {
+  pideDatos();
+  setInterval(pideDatos, 20000)
+});
+
+
 </script>
+
 
 <style>
   *{
